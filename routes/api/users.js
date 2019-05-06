@@ -61,6 +61,7 @@ router.post("/login", (req, res) => {
     //Check for password
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
+        console.log("Generating Auth token");
         // User Matched
         const payload = { id: user.id, name: user.name, avatar: user.avatar }; // Create JWT Payload
 
@@ -70,8 +71,10 @@ router.post("/login", (req, res) => {
           keys.secretOrKey,
           { expiresIn: 3600 },
           (err, token) => {
-            success: true;
-            token: "Bearer " + token;
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
           }
         );
       } else {
@@ -79,6 +82,13 @@ router.post("/login", (req, res) => {
       }
     });
   });
+});
+
+// @route   GET api/users/test
+// @desc    Tests users route
+// @access  Public
+router.get("/getAllRegisteredUser", (req, res) => {
+  User.find().then(users => res.json(users));
 });
 
 module.exports = router;
