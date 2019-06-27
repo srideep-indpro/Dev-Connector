@@ -1,0 +1,19 @@
+{
+  "DependenciesByRelease": [
+    {
+      "package": [
+        "packageName" : "cddgb",
+        {
+          "id": "100",
+          "name": "Merge",
+          "minutes": 0
+        },
+        {
+          "id": "200",
+          "name": "Build",
+          "minutes": 1
+        }
+      ]
+    }
+  ]
+}
